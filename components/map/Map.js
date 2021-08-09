@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import useSWR from 'swr';
 
-import { initializeMap } from './initializeMap';
-import { addDataLayer } from './addDataLayer';
 import { AddressToCoordinates } from '../../utilities/AddressToCoordinates';
 import { RetrieveFromDatabase } from '../../utilities/RetrieveFromDatabase';
 const mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
