@@ -153,6 +153,7 @@ function Map() {
               popup.setLngLat(coordinates).setHTML(description).addTo(map);
               });
                
+              // remove pop up on mouse leave
               map.on('mouseleave', 'points', () => {
               map.getCanvas().style.cursor = '';
               popup.remove();
