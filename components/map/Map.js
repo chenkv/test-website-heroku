@@ -91,25 +91,27 @@ function Map() {
       map.loadImage(
         'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
         function (error, image) {
-          if (error) throw error;
+          
+          if (!error) {
+            map.addImage('custom-marker', image);
+  
+            // map.addSource('points', geojson)
+            map.addSource('points', geojson);
+  
+            map.addLayer({
+              id: 'points',
+              type: 'symbol',
+              source: 'points',
+              layout: {
+                'icon-image': 'custom-marker',
+                'text-field': ['get', 'title'],
+                'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+                'text-offset': [0, 1.25],
+                'text-anchor': 'top',
+              },
+            });
+          }
 
-          map.addImage('custom-marker', image);
-
-          // map.addSource('points', geojson)
-          map.addSource('points', geojson);
-
-          map.addLayer({
-            id: 'points',
-            type: 'symbol',
-            source: 'points',
-            layout: {
-              'icon-image': 'custom-marker',
-              'text-field': ['get', 'title'],
-              'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-              'text-offset': [0, 1.25],
-              'text-anchor': 'top',
-            },
-          });
         }
       );
     });
@@ -117,7 +119,7 @@ function Map() {
     // initializeMap(mapboxgl, map);
   }, [geojson]);
 
-  return <div id="map" style={{ height: 500, width: 1000 }} />;
+  return <div id="map" style={{ height: 1000, width: 1200 }} />;
 }
 
 export default Map;
