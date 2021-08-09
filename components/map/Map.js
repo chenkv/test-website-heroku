@@ -87,6 +87,7 @@ function Map() {
       // pitch: 45,
     });
 
+
     map.on('load', function () {
       map.loadImage(
         'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
@@ -97,7 +98,7 @@ function Map() {
   
             // map.addSource('points', geojson)
             map.addSource('points', geojson);
-  
+            console.log(geojson)
             map.addLayer({
               id: 'points',
               type: 'symbol',
@@ -110,6 +111,53 @@ function Map() {
                 'text-anchor': 'top',
               },
             });
+
+            // geojson.data.features.forEach(feature => {
+
+            //   const long = feature.geometry.coordinates[0]
+            //   const lat = feature.geometry.coordinates[1]
+
+            //   new mapboxgl.Popup({ closeOnClick: false })
+            //   .setLngLat([long, lat])
+            //   .setHTML('<h1>Hello World!</h1>')
+            //   .addTo(map);
+
+            // })
+
+            const popup = new mapboxgl.Popup({
+              closeButton: false,
+              cloneOnClick: false
+            });
+
+            map.on('mouseenter', 'points', (e) => {
+
+              console.log(e)
+
+              // Change the cursor style as a UI indicator.
+              map.getCanvas().style.cursor = 'pointer';
+               
+              // Copy coordinates array.
+              const coordinates = e.features[0].geometry.coordinates.slice();
+              // const description = e.features[0].properties.description;
+              const description = 'Hello World!'
+               
+              // Ensure that if the map is zoomed out such that multiple
+              // copies of the feature are visible, the popup appears
+              // over the copy being pointed to.
+              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+              }
+               
+              // Populate the popup and set its coordinates
+              // based on the feature found.
+              popup.setLngLat(coordinates).setHTML(description).addTo(map);
+              });
+               
+              map.on('mouseleave', 'points', () => {
+              map.getCanvas().style.cursor = '';
+              popup.remove();
+              });
+            
           }
 
         }
