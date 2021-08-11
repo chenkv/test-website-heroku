@@ -1,9 +1,4 @@
-// import useSWR from "swr";
-
 export function RetrieveFromDatabase() {
-    // const { data, error } = useSWR('url', fetcher)
-
-    // return { data };
 
     var test = {
         1021938: {

@@ -8,7 +8,7 @@ const Index = () => (
         <Head>  
             <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
         </Head>
-        <h1>School Shootings Data</h1>
+        <h1>Shootings Data</h1>
         <main>
             <Map/>
         </main>

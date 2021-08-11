@@ -16,7 +16,6 @@ function Map() {
 
   // This is temporary, retrieving fixed set of data
   const test = RetrieveFromDatabase();
-  const shootingsData = {};
 
   useEffect(() => {
     getData();
@@ -68,7 +67,6 @@ function Map() {
     });
   };
 
-  // mapboxgl.accessToken = 'pk.eyJ1IjoicGVuZ3Vpb29vIiwiYSI6ImNrcmNmeGc1eTUycTMydm10dGFqZmlyaTkifQ.RYQDCD2tHifk0r-ky8DEBw';
   mapboxgl.accessToken =
     'pk.eyJ1IjoiaW5jb2duaXRvYnVyaXRvIiwiYSI6ImNrcmdyajlibDVuajEyeHF1Nnh3emp3Y2EifQ.YQJ1WIZtPqiJhV6635h0Vg';
 
@@ -162,7 +160,6 @@ function Map() {
       );
     });
 
-    // initializeMap(mapboxgl, map);
   }, [geojson]);
 
   return <div id="map" style={{ height: 1000, width: 1200 }} />;

@@ -34,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 /* Start of my notes - Added from MUI, Design for drawer*/
-  // list: {
-  //   width: 250,
-  // },
-  // fullList: {
-  //   width: 'auto',
-  // },
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: 'auto',
+  },
   // /*end of my notes */
 }));
 
