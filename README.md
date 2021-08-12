@@ -60,7 +60,7 @@ To start the server locally, use:
     
     $ npm run dev
     
-which you can then access from your browser at localhost:3000.
+which you can then access from your browser at localhost:3000. As of now, you should see a simple page with a navigation bar and a giant map in the center with some data points plotted on it.
 
 
 
