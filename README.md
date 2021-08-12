@@ -33,7 +33,7 @@
 
 ## About The Dashboard
 
-The dashboard portion of the Cloud Analytics team is focused on creating a public dashboard which displays an interactive map and statistics on gun violence around the world. Unfortunately for us, there isn't much specific data on any other country besides the US, so our project is currently focused on US data.
+The dashboard portion of the Cloud Analytics team is focused on creating a public and internal dashboard. The public dashboard should display an interactive map and provide statistics on gun violence around the world. Unfortunately for us, there isn't much specific data on any other country besides the US, so our project is currently focused on US data. We also have not started on the internal dashboard.
 
 ### Built With
 
