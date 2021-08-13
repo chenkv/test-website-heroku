@@ -85,7 +85,7 @@ Anything in the components folder returns a component of a webpage. In general, 
 
 `Map.js` uses Mapbox and returns a map component. This is done by creating and loading a map once the page has been loaded, as it will cause an error otherwise. [This tutorial](https://dev.to/naomigrace/how-to-integrate-mapbox-gl-js-in-your-next-js-project-without-react-map-gl-or-a-react-wrapper-library-50f) was used to create the map. Anything related to the map should be done here, like stylizing, adding data points, layers, etc.
 
-**!!! If the map isn't loading !!!**
+_**!!! If the map isn't loading !!!**_
 
 Our Mapbox layout was built with reference to our accounts made with Mapbox. Therefore, you should change the access token to another access token, such as the public one (pk.eyJ1IjoicGVuZ3Vpb29vIiwiYSI6ImNrcmNmeGc1eTUycTMydm10dGFqZmlyaTkifQ.RYQDCD2tHifk0r-ky8DEBw). You also need to change the map's style, as that is also custom. For now you can use the basic style `style: "mapbox://styles/mapbox/streets-v11",` where the map is created. If you want to create your own style, make an account on Mapbox and you can customize your own map, then replace the `style` key.
 
