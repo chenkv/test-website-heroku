@@ -15,57 +15,7 @@ function Map() {
   // const { data, error } = RetrieveFromDatabase();
 
   // This is temporary, retrieving fixed set of data
-  const test = RetrieveFromDatabase();
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    // This is temporary, retrieving fixed set of data
-    const test = RetrieveFromDatabase();
-
-    let tempArray = [];
-
-    for (var key in test) {
-      if (test.hasOwnProperty(key)) {
-        let address =
-          test[key].Address +
-          ' ' +
-          test[key]['City Or County'] +
-          ' ' +
-          test[key].State;
-        const data = await AddressToCoordinates(address);
-
-        if (data) {
-          tempArray.push({
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [
-                data.features[0].geometry.coordinates[0],
-                data.features[0].geometry.coordinates[1],
-              ],
-            },
-            properties: {
-              title: key,
-              'marker-color': '#3bb2d0',
-              'marker-size': 'large',
-              'marker-symbol': 'rocket',
-            },
-          });
-        }
-      }
-    }
-
-    setGeojson({
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: tempArray,
-      },
-    });
-  };
+ 
 
   mapboxgl.accessToken =
     'pk.eyJ1IjoiaW5jb2duaXRvYnVyaXRvIiwiYSI6ImNrcmdyajlibDVuajEyeHF1Nnh3emp3Y2EifQ.YQJ1WIZtPqiJhV6635h0Vg';
@@ -76,36 +26,37 @@ function Map() {
     let map = new mapboxgl.Map({
       container: 'map',
       // style: "mapbox://styles/mapbox/streets-v11",
-      style: 'mapbox://styles/incognitoburito/ckrrwlzpu1ejr17pem4jlev2e',
+      style: 'mapbox://styles/incognitoburito/cks9tzf68307c17qm3u91wuo0',
       center: [-98.35, 39.5],
       zoom: 3.2,
       // pitch: 45,
     });
 
 
-    map.on('load', function () {
-      map.loadImage(
-        'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
-        function (error, image) {
-          
-          if (!error) {
-            map.addImage('custom-marker', image);
-  
-            // map.addSource('points', geojson)
-            map.addSource('points', geojson);
-            console.log(geojson)
-            map.addLayer({
-              id: 'points',
-              type: 'symbol',
-              source: 'points',
-              layout: {
-                'icon-image': 'custom-marker',
-                'text-field': ['get', 'title'],
-                'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-                'text-offset': [0, 1.25],
-                'text-anchor': 'top',
-              },
-            });
+
+    map.on('click', function (e) {
+      // If the user clicked on one of your markers, get its information.
+      var features = map.queryRenderedFeatures(e.point, {
+        layers: ['2017_GeoDataSet'] // replace with your layer name
+      });
+      if (!features.length) {
+        return;
+      }
+      var feature = features[0];
+
+      /* 
+        Create a popup, specify its options 
+        and properties, and add it to the map.
+      */
+      var popup = new mapboxgl.Popup({ offset: [0, -15] })
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(
+          '<h3>' + feature.properties.title + '</h3>' +
+          '<p>' + feature.properties.description + '</p>'
+        )
+        .addTo(map);
+    });
+  });
 
             // geojson.data.features.forEach(feature => {
 
@@ -119,50 +70,17 @@ function Map() {
 
             // })
 
-            const popup = new mapboxgl.Popup({
-              closeButton: false,
-              cloneOnClick: false
-            });
+            /* 
+Add an event listener that runs
+  when a user clicks on the map element.
+*/
 
-            map.on('mouseenter', 'points', (e) => {
+          
 
-              console.log(e)
+        
 
-              // Change the cursor style as a UI indicator.
-              map.getCanvas().style.cursor = 'pointer';
-               
-              // Copy coordinates array.
-              const coordinates = e.features[0].geometry.coordinates.slice();
-              // const description = e.features[0].properties.description;
-              const description = 'Hello World!'
-               
-              // Ensure that if the map is zoomed out such that multiple
-              // copies of the feature are visible, the popup appears
-              // over the copy being pointed to.
-              while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-              coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-              }
-               
-              // Populate the popup and set its coordinates
-              // based on the feature found.
-              popup.setLngLat(coordinates).setHTML(description).addTo(map);
-              });
-               
-              // remove pop up on mouse leave
-              map.on('mouseleave', 'points', () => {
-              map.getCanvas().style.cursor = '';
-              popup.remove();
-              });
-            
-          }
 
-        }
-      );
-    });
-
-  }, [geojson]);
-
-  return <div id="map" style={{ height: 1000, width: 1200 }} />;
+return <div id="map" style={{ height: 1200, width: 1900 }} />;
 }
 
 export default Map;

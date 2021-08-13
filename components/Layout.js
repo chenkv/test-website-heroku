@@ -6,7 +6,8 @@ import AppBar from './AppBar';
 const basic = ({ children }) => (
     <div>
         <Head>
-            <title>Assurance</title>
+            <title>Assurance Gun Violence Data</title>
+
         </Head>
         <header>
             {/* header */}

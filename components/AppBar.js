@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+
 /* Start of my notes*/
 
 import clsx from 'clsx';
@@ -20,6 +21,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import RadioButtonCheckedIcon from '@material-ui/icons/RadioButtonChecked';
 
 /*end of my notes */
 
@@ -72,22 +74,18 @@ export default function ButtonAppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['2017', ].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+            <ListItemIcon>{index % 2 === 0 ? <RadioButtonCheckedIcon /> : <MailIcon />}</ListItemIcon>
             <ListItemText primary={text} />
+           
           </ListItem>
+          
         ))}
+         <ul>This data from December of 2017.  The data shows a series of gun shooting incidents reported in United States.    </ul>
       </List>
       <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
+
     </div>
   );
 /* end of input */
@@ -102,7 +100,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Assurance
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">United States Data</Button>
         </Toolbar>
       </AppBar>
 
